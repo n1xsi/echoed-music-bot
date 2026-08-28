@@ -1,0 +1,33 @@
+{
+    "name": "echoed-music-bot",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Music bot for Echoed — plays tracks from 900+ platforms via yt-dlp into LiveKit voice channels",
+    "type": "module",
+    "engines": {
+        "node": ">=20.11"
+    },
+    "scripts": {
+        "setup": "node scripts/setup-ytdlp.mjs",
+        "install-bot": "tsx scripts/install-dev-token.ts",
+        "invite": "tsx scripts/invite-bot.ts",
+        "check": "tsx scripts/check-install.ts",
+        "dev": "tsx watch src/index.ts",
+        "start": "tsx src/index.ts",
+        "build": "tsc",
+        "serve": "node dist/index.js",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@livekit/rtc-node": "^0.13.34",
+        "dotenv": "^17.4.2",
+        "ffmpeg-static": "^5.3.0",
+        "socket.io-client": "^4.8.3",
+        "spotify-url-info": "^3.3.3"
+    },
+    "devDependencies": {
+        "@types/node": "^22.10.2",
+        "tsx": "^4.23.12",
+        "typescript": "^5.9.3"
+    }
+}
