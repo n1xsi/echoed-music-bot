@@ -1,0 +1,43 @@
+# Runs the bot as a service on a Linux host.
+#
+#   sudo cp deploy/echoed-music-bot.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now echoed-music-bot
+#
+# Adjust User= and the paths if the checkout does not live in /opt.
+
+[Unit]
+Description=Echoed music bot
+Documentation=https://echoed.gg/developers.php
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=music
+Group=music
+WorkingDirectory=/opt/echoed-music-bot
+
+# The app reads .env from the working directory itself, so no EnvironmentFile
+# is needed. Keep that file at chmod 600 — it holds the bot token.
+ExecStart=/usr/bin/node dist/index.js
+
+# Echoed's gateway drops the connection every couple of minutes by design and
+# the bot reconnects on its own; this restart only covers an actual crash.
+Restart=always
+RestartSec=5s
+
+# Journald gets stdout as-is, which is where the bot's log lines go.
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=echoed-music-bot
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+# yt-dlp and ffmpeg stream through pipes, but yt-dlp still wants a cache dir.
+ReadWritePaths=/opt/echoed-music-bot
+
+[Install]
+WantedBy=multi-user.target
