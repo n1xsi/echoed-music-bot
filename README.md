@@ -14,8 +14,6 @@ supports.
 Built in TypeScript on Echoed's documented bot stack: the REST API for messages,
 the Socket.IO gateway for events, and LiveKit for voice.
 
----
-
 ## Setup
 
 Requires **Node.js 20.11+**.
@@ -38,8 +36,6 @@ ECHOED_BOT_TOKEN=zbot_your_key_here
 `.env.example` documents every other option; all of them have working defaults.
 
 For production, `npm run build && npm run serve`.
-
----
 
 ## Installing the bot on a server
 
@@ -135,8 +131,6 @@ can see, and whether `/play` will work there without `/join` first.
 > Renaming the bot or changing its avatar or description returns it to the review
 > queue automatically, which re-locks the API.
 
----
-
 ## Two things worth knowing before you use it
 
 **1. The bot cannot see which voice channel you're in.** Echoed's bot API exposes
@@ -156,8 +150,6 @@ protected and cannot be streamed by any third-party bot. Spotify URLs are read
 for their metadata (title, artist, playlist contents), then each track is matched
 against YouTube. Playlists resolve lazily — one match per track, at the moment it
 starts playing — so a 100-track playlist queues instantly.
-
----
 
 ## Commands
 
@@ -186,8 +178,6 @@ Default prefix is `/`, configurable via `COMMAND_PREFIX`.
 
 Unrecognised commands are ignored silently, so this bot can share a `/` prefix
 with others in the same server.
-
----
 
 ## How it works
 
@@ -223,8 +213,6 @@ globally, so a burst of commands can't get the bot throttled. This is also why
 `NOW_PLAYING_INTERVAL_MS` defaults to 10000 and is floored at 5000 — the live
 progress bar is a message edit, and each edit spends a request.
 
----
-
 ## Verification
 
 Three suites, none of which need an Echoed token:
@@ -238,8 +226,6 @@ npx tsx scripts/verify-player.ts    # real Player: playback, pause, volume, skip
 `verify-player.ts` stubs only LiveKit; everything else is the real pipeline,
 including that a fast `/skip` doesn't post a bogus error and that a broken source
 does.
-
----
 
 ## Troubleshooting
 
@@ -315,8 +301,6 @@ which the bot looks connected and silently drops every command. A watchdog in
 of total silence as death and reconnects immediately, which cuts the dead window
 to a few seconds.
 
----
-
 ## Running it on a server
 
 The one real fix for a blocked voice route, and the right home for a bot anyway.
@@ -363,8 +347,6 @@ sooner than a home connection does. If tracks start failing with *"Sign in to
 confirm you're not a bot"*, supply cookies via `YTDLP_COOKIE_FILE` as described
 above.
 
----
-
 ## Layout
 
 ```
@@ -389,4 +371,3 @@ src/
     parser.ts           command and channel-name parsing
   ui/embeds.ts          embed rendering, progress bar
 ```
-
