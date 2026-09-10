@@ -351,23 +351,31 @@ above.
 
 ```
 src/
-  index.ts              entrypoint, dependency checks, signal handling
-  config.ts             env parsing, audio format constants
-  echoed/
-    client.ts           rate-limited REST client
-    gateway.ts          Socket.IO gateway with 30s heartbeat
-    types.ts            API payload types
-  audio/
-    resolver.ts         query/URL → Track, Spotify matching
-    pcm-stream.ts       yt-dlp | ffmpeg → PCM, and its teardown
-    ytdlp.ts            process wrapper and error extraction
-  voice/connection.ts   LiveKit room + published audio track
-  player/
-    player.ts           the frame loop
-    queue.ts            queue and loop modes
-  bot/
-    music-bot.ts        command dispatch
-    session.ts          per-server state, live now-playing message
-    parser.ts           command and channel-name parsing
-  ui/embeds.ts          embed rendering, progress bar
+├── index.ts              # entrypoint, dependency checks, signal handling
+├── config.ts             # env parsing, audio format constants
+│
+├── echoed/
+│   ├── client.ts         # rate-limited REST client
+│   ├── gateway.ts        # Socket.IO gateway with 30s heartbeat
+│   └── types.ts          # API payload types
+│
+├── audio/
+│   ├── resolver.ts       # query/URL → Track, Spotify matching
+│   ├── pcm-stream.ts     # yt-dlp | ffmpeg → PCM, and its teardown
+│   └── ytdlp.ts          # process wrapper and error extraction
+│
+├── voice/
+│   └── connection.ts     # LiveKit room + published audio track
+│
+├── player/
+│   ├── player.ts         # the frame loop
+│   └── queue.ts          # queue and loop modes
+│
+├── bot/
+│   ├── music-bot.ts      # command dispatch
+│   ├── session.ts        # per-server state, live now-playing message
+│   └── parser.ts         # command and channel-name parsing
+│
+└── ui/
+    └── embeds.ts         # embed rendering, progress bar
 ```
